@@ -53,3 +53,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'faker', '~> 1.8', '>= 1.8.7'
+gem 'rails-assets-datatables', source: 'https://rails-assets.org'
