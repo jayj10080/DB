@@ -1,4 +1,5 @@
 class ContactsDatatable < ApplicationDatatable
+  delegate :edit_contact_path, to: :@view
 
   private
 
@@ -9,6 +10,11 @@ class ContactsDatatable < ApplicationDatatable
         column << contact.last_name
         column << contact.email
         column << contact.phone
+
+        links = []
+        links << link_to('Edit', edit_contact_path(contact))
+        links << link_to('Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' })
+        column << links.join(' | ')
       end
     end
   end
@@ -32,7 +38,8 @@ class ContactsDatatable < ApplicationDatatable
       search_string << "#{term} like :search"
     end
 
-    contacts = Contact.page(page).per(per_page)
+    contacts = Contact.order("#{sort_column} #{sort_direction}")
+    contacts = contacts.page(page).per(per_page)
     contacts = contacts.where(search_string.join(' or '), search: "%#{params[:search][:value]}%")
   end
 
