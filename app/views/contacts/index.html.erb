@@ -1,5 +1,6 @@
 <p id="notice"><%=notice %></p>
 
+<div class="col-10 offset-1">
 <h1>Contacts</h1>
 
 <%= content_tag :table, role: :datatable, data: { url: contacts_path(format: :json)} do %>
@@ -19,4 +20,5 @@
 <% end %>
 
 <%= link_to "New Entry", new_contact_path %>
+</div>
 
